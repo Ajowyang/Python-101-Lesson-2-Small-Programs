@@ -1,40 +1,65 @@
+import json
+
+with open('calc_messages.json', 'r') as file:
+    MESSAGES = json.load(file)
+
+def messages(message, lang='en'):
+	return MESSAGES[lang][message]
+
 def prompt(message):
     print(f'==> {message}')
 
 def invalid_num(num_str):
     try:
-        int(num_str)
+        float(num_str)
     except ValueError:
         return True
     return False
 
-prompt("Welcome to calculator!")
+lang = 'es'
 
-prompt("What's the first number? ")
-num1 = input()
-while invalid_num(num1):
-    prompt("Hmm.. doesn't look like valid number")
+
+prompt(messages('welcome', lang))
+
+while True:
+    output = None
+    prompt(messages('first_number', lang))
     num1 = input()
+    while invalid_num(num1):
+        prompt(messages('invalid_number', lang))
+        num1 = input()
 
-prompt("What's the second number? ")
-num2 = input()
-while invalid_num(num2):
-    prompt("Hmm.. doesn't look like valid number")
+    prompt(messages('second_number', lang))
     num2 = input()
+    while invalid_num(num2):    
+        prompt(messages('invalid_number', lang))
+        num2 = input()
 
-prompt('What operation would you like to perform?\n1) Add 2) Subtract 3) Multi\
-    ply 4) Divide ')
-operation = input()
-while operation not in ['1', '2', '3', '4']:
-    prompt("Must choose 1, 2, 3, or 4")
+    prompt(messages('operation', lang))
     operation = input()
+    while operation not in ['1', '2', '3', '4']:    
+        prompt(messages('invalid_operation', lang))
+        operation = input()
 
-match operation:
-    case '1':
-        prompt(f"The result is: {int(num1) + int(num2)}")
-    case '2':
-        prompt(f"The result is: {int(num1) - int(num2)}")
-    case '3':
-        prompt(f"The result is: {int(num1) * int(num2)}")
-    case '4':
-        prompt(f"The result is: {int(num1) / int(num2)}")
+    match operation :
+        case '1':
+            output = float(num1) + float(num2)
+            
+        case '2':
+            output = float(num1) - float(num2)
+            
+        case '3':
+            output = float(num1) * float(num2)
+            
+        case '4':
+            output = float(num1) / float(num2)
+    
+    prompt(messages('result', lang).format(result=output))    
+
+    keep_going = input(messages("another_calc", lang))
+    while keep_going.lower() not in ['y', 'n']:    
+        prompt(messages('y_or_n', lang))
+        keep_going = input()
+    if keep_going.lower() == 'n':
+        break
+   
