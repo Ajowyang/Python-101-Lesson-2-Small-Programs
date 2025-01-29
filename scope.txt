@@ -1,0 +1,28 @@
+1. 5, global variable num is initialized to 5 and the function prints it
+
+2. 5, global variable num is initialized to 5, the function 
+initializes its own local variable to 10, the function call
+doesn't return or print anything and the prins statement prints the global variable 5
+
+3. 10, global variable num is initialized to 5, the function 
+the function my_func references the global variable num and sets
+it to 10, the function call executes the code that sets num to 
+10 and then the print statement prints num which is 10
+
+4. Hello World, the outer function has outer_var which is 
+initialized to 'Hello', the inner function has a inner_var initialized
+to 'World' and a print statement that prints the outer_var and
+the inner_var, the function call of inner() is in ther outer 
+function and the function call of outer() executes that code:
+first initializing outer_var='Hello' then defining the inner 
+function which initializes innter_var='World' the the print 
+statement followed by a function call of inner()
+
+5. won't print anything, raises a NameError, num is not defined
+outside my_func
+
+6. Inner 1: 25
+   Inner 2: 15
+inner_func1 has its own local variable x which is initialized to
+25, inner_func2 references the variable x that is initialized to
+15 in my_func
