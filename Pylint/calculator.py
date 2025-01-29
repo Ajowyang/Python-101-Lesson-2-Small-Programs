@@ -4,7 +4,7 @@ with open('calc_messages.json', 'r') as file:
     MESSAGES = json.load(file)
 
 def messages(message, lang='en'):
-	return MESSAGES[lang][message]
+    return MESSAGES[lang][message]
 
 def prompt(message):
     print(f'==> {message}')
@@ -16,50 +16,44 @@ def invalid_num(num_str):
         return True
     return False
 
-lang = 'es'
+LANG = 'es'
 
-
-prompt(messages('welcome', lang))
+prompt(messages('welcome', LANG))
 
 while True:
-    output = None
-    prompt(messages('first_number', lang))
+    OUTPUT = None
+    prompt(messages('first_number', LANG))
     num1 = input()
     while invalid_num(num1):
-        prompt(messages('invalid_number', lang))
+        prompt(messages('invalid_number', LANG))
         num1 = input()
 
-    prompt(messages('second_number', lang))
+    prompt(messages('second_number', LANG))
     num2 = input()
-    while invalid_num(num2):    
-        prompt(messages('invalid_number', lang))
+    while invalid_num(num2):
+        prompt(messages('invalid_number', LANG))
         num2 = input()
 
-    prompt(messages('operation', lang))
+    prompt(messages('operation', LANG))
     operation = input()
-    while operation not in ['1', '2', '3', '4']:    
-        prompt(messages('invalid_operation', lang))
+    while operation not in ['1', '2', '3', '4']:
+        prompt(messages('invalid_operation', LANG))
         operation = input()
 
     match operation :
         case '1':
-            output = float(num1) + float(num2)
-            
+            OUTPUT = float(num1) + float(num2)
         case '2':
-            output = float(num1) - float(num2)
-            
+            OUTPUT = float(num1) - float(num2)
         case '3':
-            output = float(num1) * float(num2)
-            
+            OUTPUT = float(num1) * float(num2)
         case '4':
-            output = float(num1) / float(num2)
-    
-    prompt(messages('result', lang).format(result=output))    
+            OUTPUT = float(num1) / float(num2)
+    prompt(messages('result', LANG).format(result=OUTPUT))
 
-    keep_going = input(messages("another_calc", lang))
-    while keep_going.lower() not in ['y', 'n']:    
-        prompt(messages('y_or_n', lang))
+    keep_going = input(messages("another_calc", LANG))
+    while keep_going.lower() not in ['y', 'n']:
+        prompt(messages('y_or_n', LANG))
         keep_going = input()
     if keep_going.lower() == 'n':
         break
-   
