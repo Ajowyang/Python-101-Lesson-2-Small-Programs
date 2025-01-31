@@ -28,7 +28,7 @@ def display_winner(player_choice, comp_choice):
 def prompt_and_validate_input():
     prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
     player_choice = input()
-    while choice not in VALID_CHOICES:
+    while player_choice not in VALID_CHOICES:
         prompt("That's not a valid choice")
         player_choice = input()
     return player_choice
